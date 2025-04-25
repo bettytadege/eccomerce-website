@@ -42,7 +42,7 @@ function App() {
           <Route element={<EditProfile />} path="editprofile" />
         </Route>
         {/* nested route */}
-        <Route element={<ProductDetail />} path="/productdetail" />
+        <Route element={<ProductDetail />} path="/product/:id" />
         <Route element={<Cart />} path="/cart" />
         <Route element={<AllProducts />} path="/allproducts" />
       </Routes>
