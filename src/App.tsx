@@ -13,13 +13,14 @@ import Home from "./page/Home";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 import { Toaster } from "sonner";
+import Checkout from "./components/order/Checkout";
 
 const hiddenHeaderRoutes = [
   "/signin",
   "/signup",
   "/confirmotp",
-  "/profiledashboard",
-  "/profiledashboard/editprofile",
+  "/profile",
+  "/profile/editprofile",
   "/forgotpassword",
 ];
 
@@ -37,14 +38,15 @@ function App() {
         <Route element={<ConfirmOtp />} path="/confirmotp" />
         <Route element={<ForgotPassword />} path="/forgotpassword" />
         {/* nested route */}
-        <Route element={<ProfileDashboard />} path="/profiledashboard">
+        <Route element={<ProfileDashboard />} path="/profile">
           <Route element={<UserOrders />} index />
           <Route element={<EditProfile />} path="editprofile" />
         </Route>
         {/* nested route */}
         <Route element={<ProductDetail />} path="/product/:id" />
         <Route element={<Cart />} path="/cart" />
-        <Route element={<AllProducts />} path="/allproducts" />
+        <Route element={<Checkout />} path="/checkout" />
+        <Route element={<AllProducts />} path="/allproducts/:id" />
       </Routes>
       <Toaster richColors position="top-center" />
     </>
