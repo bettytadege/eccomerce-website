@@ -21,13 +21,13 @@ type AuthData ={
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [userData, setUserData] = useState<User |null>(null);
+  const [userData, setUserData] = useState<User |null>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [productData, setProductData] = useState<Product | null>();
   const [productId, setProductId] = useState<string>('');
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
-  console.log('token from auth⭐⭐⭐',token)
-  console.log('productid from context✨✨',productId)
+  // console.log('token from auth⭐⭐⭐',token)
+  // console.log('productid from context✨✨',productId)
 
   const fetchUserData = async (token: string) => {
     const { userId, isValid } = decodeJWT(token);
