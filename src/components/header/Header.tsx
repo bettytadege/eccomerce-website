@@ -9,7 +9,7 @@ import ShoppingCart from "./ShoppingCart"
 function Header() {
   return (
     <>
-   <div className="w-full  py-7 bg-white shadow-xs">
+   <div className="w-full  py-7 bg-white shadow-xs sticky top-0 z-50">
     <div className="flex justify-between mx-8 ">
         <Menu/>
         <div className="flex gap-5">
