@@ -76,10 +76,10 @@ function CartItem({ cartData }: CartItemProps) {
                     {item.productVariant?.product?.name}
                   </p>
                   <p>Br {item.productVariant?.price}</p>
-                  <div className="flex gap-3 sepia-100">
+                  <div className="">
                     {item.productVariant?.attribute?.map((attr, index) => (
                       <p className="" key={index}>
-                        {attr.value}
+                        { attr.name}:{attr.value}
                       </p>
                     ))}
                   </div>
