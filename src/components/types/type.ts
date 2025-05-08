@@ -28,6 +28,7 @@ export type Attribute= {
     attribute: Attribute[];
     product:Product[]
   }
+
 export type User={
     name?:string, 
     email:string,
@@ -44,9 +45,17 @@ export type Category={
 }
 
 export type Cart={
+    id:string,
     variantId:string, 
     userId:string, 
-    id:string,
     quantity:number,
     productVariant?:ProductVariant[]
 }
+
+export type Address = {
+  id: string;
+  city: string;
+  state: string;
+  street: string;
+  postalCode?: string;
+};
