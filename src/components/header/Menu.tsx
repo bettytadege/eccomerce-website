@@ -15,10 +15,10 @@ function Menu() {
     setOpen(!open);
     try {
       const rootCategories=await instance.get('categories')
-      console.log('root categories',rootCategories)
+      // console.log('root categories',rootCategories)
       const children = rootCategories.data
       .flatMap((category:Category) => category.children)
-      console.log('childrenNames',children)
+      // console.log('childrenNames',children)
       setCategories(children)
     } catch (error) {
       console.log('error',error)
