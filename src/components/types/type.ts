@@ -1,3 +1,4 @@
+
 export type Product={
     
     id:string,
@@ -34,7 +35,8 @@ export type User={
     email:string,
     firebaseUid:string,
     phoneNumber?:string,
-  id:string
+   id:string,
+  address:Address
 }
 
 export type Category={
@@ -49,7 +51,7 @@ export type Cart={
     variantId:string, 
     userId:string, 
     quantity:number,
-    productVariant?:ProductVariant[]
+    productVariant?:ProductVariant
 }
 
 export type Address = {
