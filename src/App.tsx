@@ -44,8 +44,8 @@ function App() {
         </Route>
         {/* nested route */}
         <Route element={<ProductDetail />} path="/product/:id" />
-        <Route element={<Cart />} path="/cart" />
-        <Route element={<Checkout />} path="/checkout" />
+        <Route element={<Cart />} path="/cart/:userId" />
+        <Route element={<Checkout />} path="/checkout/:userId" />
         <Route element={<AllProducts />} path="/allproducts/:id" />
       </Routes>
       <Toaster richColors position="top-center" />
