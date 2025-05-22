@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // import { useNavigate } from "react-router-dom"
 import CartItemList from "./CartItemList"
-import OrderSummary from "./OrderSummary"
+
 import { useCart } from "../context/CartContext"
 import Summary from "../common/Summary"
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
 import { instance } from "@/api/axiosInstance";
+import { IoBagCheckOutline } from "react-icons/io5";
 
 
 function Cart() {
@@ -17,7 +19,7 @@ function Cart() {
   const { userId } = useParams<{ userId: string }>();
   // const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
+ console.log(loading)
 
   const subTotal = cartData.reduce((total, cart) => {
     const itemCost = (cart?.quantity || 0) * (cart?.productVariant?.price || 0);
@@ -61,7 +63,7 @@ function Cart() {
         console.log(`Order created for cart item ${item.id}:`, result);
       }
 
-      navigate(`/checkout/${userId}`, { state: { orders: orderResults, subTotal } });
+      navigate(`/checkout/${userId}`);
     } catch (error: any) {
       if(error.code === 400){
         toast.error('')
@@ -73,7 +75,7 @@ function Cart() {
     }
   };
   
-  console.log('cart',cartData)
+
   return (
     <div className="bg-[#F5F5F5] w-full min-h-screen p-10">
       {/* {cartData.length === 0 ?
@@ -86,7 +88,7 @@ function Cart() {
         <div className="flex justify-between gap-10">
         <CartItemList/>
         
-          <Summary name={'Checkout'} onClick={handleCheckout}/>
+          <Summary name={'Checkout'} onClick={handleCheckout} subTotal={subTotal} item={cartData.length}  icon={<IoBagCheckOutline />}/>
       
         </div>
 {/* } */}
