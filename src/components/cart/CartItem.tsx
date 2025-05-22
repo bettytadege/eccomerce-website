@@ -55,7 +55,7 @@ function CartItem({ cartData }: CartItemProps) {
         const image =
           item.productVariant?.attribute?.find((attr) => attr.image)?.image ||
           item.productVariant?.product?.image;
- console.log('image',image)
+
         return (
           <div key={item.id} className="w-full bg-white h-auto py-4">
             <div className="flex justify-between items-center px-4">
@@ -103,6 +103,7 @@ function CartItem({ cartData }: CartItemProps) {
                     </button>
                     <p>{item.quantity}</p>
                     <button
+                       disabled={item?.productVariant?.stock <= 1}
                       className="cursor-pointer"
                       onClick={() =>
                         handleQuantityChange(item.quantity + 1, item.id)
