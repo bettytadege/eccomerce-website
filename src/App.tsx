@@ -14,6 +14,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Cart from "./components/cart/Cart";
 import { Toaster } from "sonner";
 import Checkout from "./components/order/Checkout";
+import Footer from "./components/footer/Footer";
+import { PaginationSection } from "./components/pagnation/PaginationSection";
 
 const hiddenHeaderRoutes = [
   "/signin",
@@ -49,6 +51,10 @@ function App() {
         <Route element={<AllProducts />} path="/allproducts/:id" />
       </Routes>
       <Toaster richColors position="top-center" />
+    <div className="">
+
+      <Footer/>
+    </div>
     </>
   );
 }
