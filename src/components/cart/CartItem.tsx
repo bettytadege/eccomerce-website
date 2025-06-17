@@ -59,8 +59,8 @@ function CartItem({ cartData }: CartItemProps) {
         return (
           <div key={item.id} className="w-full bg-white h-auto py-4">
             <div className="flex justify-between items-center px-4">
-              <div className="flex gap-7">
-                <div className="w-32 h-32">
+              <div className="flex gap-7" >
+                <div className="w-32 h-32"onClick={() => navigate(`/product/${item.productVariant?.productId}`)}>
                   {image ? (
                     <img
                       src={image}
