@@ -1,5 +1,5 @@
 
-export type Product={
+export type Products={
     
     id:string,
     name:string,
@@ -27,7 +27,7 @@ export type Attribute= {
     productId: string;
     price: number;
     attribute: Attribute[];
-    product:Product[]
+    product:Products[]
   }
 
 export type User={
