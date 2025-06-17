@@ -8,7 +8,8 @@ import { getAuth } from "firebase/auth";
 function ProfileMenu({ setOpen }) {
   const { userData } = useAuth();
   const navigate = useNavigate();
-
+ 
+ 
   const handleLogout = () => {
     const auth = getAuth();
     auth.signOut();
