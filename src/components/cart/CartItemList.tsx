@@ -1,15 +1,36 @@
+import { useEffect } from "react"
 import CartItem from "./CartItem"
+
+import { instance } from "@/api/axiosInstance"
+
+import { useCart } from "../context/CartContext"
+import { useParams } from "react-router-dom"
 
 
 function CartItemList() {
+
+const{cartData,setCartData}=useCart()
+
+const {userId}=useParams<{userId:string}>()
+// console.log('cart data',cartData)
+  const fetchData=async(id:string)=>{
+    console.log('id',id)
+try {
+  const res=await instance.get('cart',{
+    params:{userId:id}
+  })
+  setCartData(res.data)
+} catch (error) {
+  console.log('error',error)
+}
+  }
+  useEffect(()=>{fetchData(userId)},[userId])
+
   return (
     <>
-    <div className="bg-white w-[65%] h-fit flex flex-col gap-5 p-3 ">
-        <CartItem name="Women zip up jackets" price={3400} variation1="Black" variation2="M" img="https://ae-pic-a1.aliexpress-media.com/kf/S22ac17c4171b45f3a830df9f99c26411t.png"/>
-        <CartItem name="Women zip up jackets" price={3400} variation1="Black" variation2="M" img="https://ae-pic-a1.aliexpress-media.com/kf/S22ac17c4171b45f3a830df9f99c26411t.png"/>
-        <CartItem name="Women zip up jackets" price={3400} variation1="Black" variation2="M" img="https://ae-pic-a1.aliexpress-media.com/kf/S22ac17c4171b45f3a830df9f99c26411t.png"/>
-        <CartItem name="Women zip up jackets" price={3400} variation1="Black" variation2="M" img="https://ae-pic-a1.aliexpress-media.com/kf/S22ac17c4171b45f3a830df9f99c26411t.png"/>
-        
+    <div className="bg-white lg:w-[65%] md:w-[55%] sm:w-full w-full h-fit flex flex-col gap-5 p-3 ">
+        <CartItem   cartData={cartData}/>
+       
     </div>
     </>
   )
