@@ -1,4 +1,5 @@
 import { CarouselPlugin } from "@/components/carousel/CarouselPlugin";
+
 import Product from "@/components/products/Product";
 
 
@@ -9,7 +10,7 @@ function Home() {
         <div className="space-y-10">
           <CarouselPlugin />
           <Product />
-          
+           
         </div>
       </div>
     </>
