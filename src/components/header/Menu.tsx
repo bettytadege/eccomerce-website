@@ -57,7 +57,7 @@ function Menu() {
             onClick={handleCategoryMenu}
           ></div>
 
-          <nav className="fixed top-0 left-0 h-[810px] w-[22%] bg-white z-50 shadow-lg transition-transform duration-300 ">
+          <nav className="fixed top-0 left-0 min-h-[810px] h-screen w-[80%] lg:w-[22%] md:w-[30%] sm:w-[35%] bg-white z-50 shadow-lg transition-transform duration-300 ">
             <div className="mx-6">
             <div className="float-end p-6 ">
              
