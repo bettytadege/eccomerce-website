@@ -5,23 +5,23 @@ import ProductPreview from "./ProductPreview";
 
 import { instance } from "@/api/axiosInstance";
 import { useParams } from "react-router-dom";
-import { Product } from "../types/type";
+import { Products } from "../types/type";
+import RelatedProduct from "./RelatedProduct";
 
 
 function ProductDetail() {
-  const[product,setProduct]=useState<Product[]>([])
+  const[product,setProduct]=useState<Products[]>([])
   
   
   const { id } = useParams();
-  // console.log('id param',id)
+  
   const fetchProducts=async(id:string)=>{
     if(!id){
       throw Error('id is undefined')
     }
     try {
       const res=await instance.get(`product/${id}`)
-      // console.log('product',res)
-      // setProduct(res.data)
+      
       setTimeout(() => {
         setProduct(res.data);
       }, 500);
@@ -37,13 +37,14 @@ function ProductDetail() {
   useEffect(()=>{fetchProducts(id)},[id])
   return (
     <>
-      <div className="w-full h-screen ">
-        <div className="lg:flex lg:gap-16 md:flex md:gap-10 lg:mx-20 md:mx-8 mt-10">
-          <ProductPreview product={product} />
-          <ProductOption  product={product}/>
-        </div>
-       
-      </div>
+    <div className="w-full min-h-screen space-y-20">
+  <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16 sm:gap-32 mx-4 sm:mx-8 lg:mx-20 mt-10 items-center md:items-start">
+    <ProductPreview product={product} />
+    <ProductOption product={product} />
+  </div>
+  <RelatedProduct categoryId={product.categoryId} productId={product.id} />
+</div>
+
     </>
   );
 }
