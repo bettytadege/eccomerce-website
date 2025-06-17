@@ -1,26 +1,77 @@
-import { PiShieldCheckLight } from "react-icons/pi"
-import { Button } from "../ui/button"
-import { useNavigate } from "react-router-dom"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { instance } from "@/api/axiosInstance";
+import {  useState } from "react";
+import { Button } from "../ui/button";
+import { PiShieldCheckLight } from "react-icons/pi";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { toast } from "sonner";
+import Summary from "../common/Summary";
+
+export default function OrderSummary() {
+  const navigate = useNavigate ();
+  const { cartData } = useCart();
+  const { userId } = useParams<{ userId: string }>();
+  // const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
 
-function OrderSummary() {
-  const navigate=useNavigate()
-  return (
-    <>
-    <div className="bg-white w-[30%] h-fit p-7 rounded-md space-y-6">
-        <h1 className="font-semibold text-xl">Summary</h1>
-        <div className="flex justify-between">
-        <p>Esimated total</p>
-        <span className="font-semibold text-lg">ETB0.00</span>
-  
-        </div>
-        <Button onClick={()=>navigate('/checkout')}  className="w-full bg-[#1689FE] rounded-md py-5 hover:bg-[#168afee1]">
-        <PiShieldCheckLight size={20} color="white" />
-            Checkout</Button>
-    </div>
+  const subTotal = cartData.reduce((total, cart) => {
+    const itemCost = (cart?.quantity || 0) * (cart?.productVariant?.price || 0);
+    return total + itemCost;
+  }, 0);
+
+  const handleCheckout = async () => {
+    setLoading(true);
     
-    </>
-  )
-}
 
-export default OrderSummary
+    try {
+   
+
+      const orderResults = [];
+      for (const item of cartData) {
+        if (
+          !item?.productVariant?.productId ||
+          !item?.variantId ||
+          !item?.quantity ||
+          item.quantity <= 0 ||
+          !item?.id
+        ) {
+          // console.warn("Skipping invalid cart item:", item);
+          continue;
+        }
+
+        const payload = {
+          userId:item.userId,
+          productId: item.productVariant.productId,
+          quantity: item.quantity,
+          variantId: item.variantId,
+          cartId: item.id,
+          
+        };
+
+        console.log("Sending payload for item:", payload);
+
+        const response = await instance.post("order", payload);
+        const result = response.data;
+        orderResults.push(result);
+        console.log(`Order created for cart item ${item.id}:`, result);
+      }
+
+      navigate(`/checkout/${userId}`, { state: { orders: orderResults, subTotal } });
+    } catch (error: any) {
+      if(error.code === 400){
+        toast.error('')
+      }
+      console.error("Error creating order:", error);
+      // setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    
+    <Summary name={'Checkout'} onClick={handleCheckout}/>
+  );
+}
