@@ -13,13 +13,13 @@ import { IoBagCheckOutline } from "react-icons/io5";
 
 
 function Cart() {
- 
-  const navigate = useNavigate ();
+
+  const navigate = useNavigate();
   const { cartData } = useCart();
   const { userId } = useParams<{ userId: string }>();
   // const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
- console.log(loading)
+  console.log(loading)
 
   const subTotal = cartData.reduce((total, cart) => {
     const itemCost = (cart?.quantity || 0) * (cart?.productVariant?.price || 0);
@@ -28,10 +28,10 @@ function Cart() {
 
   const handleCheckout = async () => {
     setLoading(true);
-    
+
 
     try {
-   
+
 
       const orderResults = [];
       for (const item of cartData) {
@@ -47,12 +47,12 @@ function Cart() {
         }
 
         const payload = {
-          userId:item.userId,
+          userId: item.userId,
           productId: item.productVariant.productId,
           quantity: item.quantity,
           variantId: item.variantId,
           cartId: item.id,
-          
+
         };
 
         console.log("Sending payload for item:", payload);
@@ -65,7 +65,7 @@ function Cart() {
 
       navigate(`/checkout/${userId}`);
     } catch (error: any) {
-      if(error.code === 400){
+      if (error.code === 400) {
         toast.error('')
       }
       console.error("Error creating order:", error);
@@ -74,24 +74,25 @@ function Cart() {
       setLoading(false);
     }
   };
-  
+
 
   return (
     <div className="bg-[#F5F5F5] w-full min-h-screen p-10">
-      {/* {cartData.length === 0 ?
-        
+      {cartData.length === 0 ?
+
         <div className="flex flex-col items-center justify-center gap-4 bg-white p-4">
-        <p className="text-xl font-semibold">Your Cart Is Empty</p>
-        <button onClick={()=>navigate('/')} className="border-1 focus:border-2 border-black rounded-full w-fit py-1 px-7  ">Go Home</button>
+          <p className="text-xl font-semibold">Your Cart🛒 Is Empty</p>
+          <button onClick={() => navigate('/')} className="border-1 focus:border-2 border-black rounded-full w-fit py-1 px-7  ">Go Home</button>
         </div>
-        : */}
-        <div className="flex justify-between gap-10">
-        <CartItemList/>
-        
-          <Summary name={'Checkout'} onClick={handleCheckout} subTotal={subTotal} item={cartData.length}  icon={<IoBagCheckOutline />}/>
-      
+
+        :
+        <div className="flex md:flex-row lg:flex-row justify-between flex-col gap-10 sm:flex-col">
+          <CartItemList />
+
+          <Summary name={'Checkout'} onClick={handleCheckout} subTotal={subTotal} item={cartData.length} icon={<IoBagCheckOutline />} />
+
         </div>
-{/* } */}
+      }
     </div>
   )
 }
