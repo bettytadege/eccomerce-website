@@ -11,8 +11,8 @@ type AuthData ={
   isLoggedIn: boolean;
   signIn: (token: string) => Promise<void>;
   signUp: (token: string) => void;
-  setProductData: (data: any) => void;
-  productData: Product;
+  
+ 
   productId:string,
   setProductId:(id:string)=>void
 }
@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthData | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [userData, setUserData] = useState<User |null>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [productData, setProductData] = useState<Product | null>();
+ 
   const [productId, setProductId] = useState<string>('');
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
   // console.log('token from auth⭐⭐⭐',token)
@@ -72,8 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isLoggedIn,
         signIn,
         signUp,
-        setProductData,
-        productData,
+       
         productId,setProductId
       }}
     >
