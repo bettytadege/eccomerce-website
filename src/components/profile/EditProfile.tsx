@@ -9,8 +9,7 @@ import { BiSolidPencil } from "react-icons/bi";
 function EditProfile() {
    const[openModal,setOpenModal]=useState(false)
    const{userData}=useAuth()
-
-     console.log('userData',userData)
+ 
 
   return (
     <>
@@ -32,7 +31,7 @@ function EditProfile() {
         </li>
         <li className="space-y-">
           <p className="text-[#707070]">Email</p>
-          <span>{userData.email}</span>
+          <span>{userData?.email}</span>
         </li>
       </ul>
     </Card>
