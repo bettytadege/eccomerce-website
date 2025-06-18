@@ -2,13 +2,13 @@
 import { Key, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductItem from "./ProductItem";
-import { Product } from "../types/type";
+import { Products } from "../types/type";
 import { instance } from "@/api/axiosInstance";
 import { PaginationSection } from "../pagnation/PaginationSection";
 
 function AllProducts() {
   const { id } = useParams<{ id: string }>();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Products[]>([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit] = useState(4); 
@@ -41,7 +41,7 @@ function AllProducts() {
     <>
       <div className="py-14 space-y-16 flex justify-center w-full">
         <div className="grid grid-cols-2 gap-4 sm:g6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 md:gap-5 place-items-center">
-          {products.map((product: Product, key: Key | null) => (
+          {products.map((product: Products, key: Key | null) => (
             <ProductItem
               key={key}
               img={product.image[0]}
