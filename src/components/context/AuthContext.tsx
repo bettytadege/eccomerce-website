@@ -3,7 +3,7 @@ import { instance } from "@/api/axiosInstance";
 import { decodeJWT } from "@/utils/jwtUtils";
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { Product,User } from "../types/type";
+import { Products,User } from "../types/type";
 
 type AuthData ={
   userData: User;
