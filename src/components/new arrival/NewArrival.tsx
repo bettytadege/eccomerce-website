@@ -16,7 +16,7 @@ function NewArrival() {
     { name: 'Women Jacket 6', price: 90, image: [img1] },
   ]
 
-  const [newarrivals, setNewarrivals] = useState(staticNewArrivals)
+  const [newarrivals, setNewarrivals] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const item = 4
 
