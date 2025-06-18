@@ -7,12 +7,14 @@ import { toast } from "sonner";
 import ProductOptionSkeleton from "./ProductOptionSkeleton";
 import { useNavigate } from "react-router-dom";
 import { Products, ProductVariant, Attribute } from "@/components/types/type";
+import SignIn from "../signin/SignIn";
 
 interface ProductOptionProps {
   product: Products;
 }
 
 function ProductOption({ product }: ProductOptionProps) {
+  const{isLoggedIn}=useAuth()
   const [count, setCount] = useState<number>(1);
   const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
@@ -138,6 +140,9 @@ function ProductOption({ product }: ProductOptionProps) {
   };
 
   const handleAddToCart = async () => {
+    if(isLoggedIn === false){
+      return <SignIn/>
+    }
     if (!selectedVariantId) {
       toast.error("Please select a valid variant combination");
       return;
