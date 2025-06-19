@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// import { useNavigate } from "react-router-dom"
+
 import CartItemList from "./CartItemList"
 
 import { useCart } from "../context/CartContext"
@@ -17,7 +17,7 @@ function Cart() {
   const navigate = useNavigate();
   const { cartData } = useCart();
   const { userId } = useParams<{ userId: string }>();
-  // const [error, setError] = useState<string | null>(null);
+ 
   const [loading, setLoading] = useState(false);
   console.log(loading)
 
