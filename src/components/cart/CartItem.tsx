@@ -54,7 +54,7 @@ function CartItem({ cartData }: CartItemProps) {
       {cartData.map((item) => {
         const image =
           item.productVariant?.attribute?.find((attr) => attr.image)?.image ||
-          item.productVariant?.product?.image;
+          item.productVariant?.product?.image[0];
 
         return (
           <div key={item.id} className="w-full bg-white h-auto py-4">
@@ -103,7 +103,8 @@ function CartItem({ cartData }: CartItemProps) {
                     </button>
                     <p>{item.quantity}</p>
                     <button
-                       disabled={item?.productVariant?.stock <= 1}
+                       disabled={ !item.productVariant ||
+                        item.quantity >= item.productVariant.stock}
                       className="cursor-pointer"
                       onClick={() =>
                         handleQuantityChange(item.quantity + 1, item.id)
