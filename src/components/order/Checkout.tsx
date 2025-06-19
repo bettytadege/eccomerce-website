@@ -6,6 +6,7 @@ import AddressSection from './AddressSection'
 import OrderItemDetail from './OrderItemDetail'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Order } from '../types/type'
 
 
 
@@ -13,7 +14,7 @@ import { useParams } from 'react-router-dom'
 
 function Checkout() {
   // const [payment,setPayment]=useState()
-  const [order,setOrder]=useState([])
+  const [order,setOrder]=useState<Order[]>([])
    const{userId,}=useParams<string>()
 
   //calculate total
@@ -35,6 +36,7 @@ function Checkout() {
   const handlePayment=async()=>{
     console.log('payment')
     const pay=await instance.post('initialize')
+    console.log('payment',pay)
   }
   return (
     <>
