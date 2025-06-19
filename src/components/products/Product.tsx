@@ -7,7 +7,7 @@ import { instance } from "@/api/axiosInstance";
 import { Category, Products } from "../types/type";
 
 function Product() {
-  // const { productData, setProductData } = useAuth();
+  
   const [ category, setCategory ] = useState<Category[]>([]);
   const navigate=useNavigate()
   console.log('parents',category)
@@ -39,7 +39,7 @@ function Product() {
           <h2 className="text-4xl font-semibold  text-start">{category.name}</h2>
 
           <div className="grid grid-cols-2 gap-4  sm:grid-cols-2 md:grid-cols-2 md:gap-5s lg:grid-cols-4 lg:gap-8 place-items-center ">
-            {/* {category.products.length >=1 &&} */}
+           
             {category.products.slice(0, 4).map((product:Products, key:Key | null) => (
               <ProductItem
                 key={key}
