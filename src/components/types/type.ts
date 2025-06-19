@@ -6,12 +6,12 @@ export type Products={
     descripion:string,
     image:string[],
     price:number,
-    stoke:number,
+    stock:number,
     sku:string,
     sellerId:string,
     mainCategoryId:string,
     categoryId:string,
-    // ProductVariant:ProductVariant[]
+    ProductVariant:ProductVariant[]
 
 }
 export type Attribute= {
@@ -40,11 +40,13 @@ export type User={
   address:Address
 }
 
+
 export type Category={
     
     name:string, 
     id:string,
-    children:string[]
+    children:string[],
+    products:Products[]
 }
 
 export type Cart={
@@ -62,3 +64,29 @@ export type Address = {
   street: string;
   postalCode?: string;
 };
+
+export type Order= {
+  id: string;
+  userId: string;
+  status: OrderStatus; 
+  productId: string;
+  quantity: number;
+  subTotal: number;
+  variantId: string;
+  cartId?: string | null;
+  addressId?: string | null;
+  product?: Products;
+  productVariant?: ProductVariant;
+  user?: User;
+  cart?: Cart;
+  address?: Address;
+}
+
+
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  CANCELLED = 'CANCELLED',
+  FAILED = 'FAILED',
+  DELIVERED = 'DELIVERED',
+  CONFIRMED = 'CONFIRMED',
+}
