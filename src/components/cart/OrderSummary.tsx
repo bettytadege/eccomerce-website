@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { instance } from "@/api/axiosInstance";
 import {  useState } from "react";
-import { Button } from "../ui/button";
-import { PiShieldCheckLight } from "react-icons/pi";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { toast } from "sonner";
@@ -37,7 +36,7 @@ export default function OrderSummary() {
           item.quantity <= 0 ||
           !item?.id
         ) {
-          // console.warn("Skipping invalid cart item:", item);
+         
           continue;
         }
 
@@ -69,9 +68,12 @@ export default function OrderSummary() {
       setLoading(false);
     }
   };
+  if(loading){
+    return <div className="bg-gray-200 h-40 w-32"></div>
+  }
 
   return (
     
-    <Summary name={'Checkout'} onClick={handleCheckout}/>
+    <Summary name={'Checkout'} onClick={handleCheckout} subTotal={0} />
   );
 }
