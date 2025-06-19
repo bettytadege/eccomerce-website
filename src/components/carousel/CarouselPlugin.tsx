@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -49,9 +50,7 @@ export function CarouselPlugin() {
                     <h2 className="text-4xl md:text-5xl font-bold mb-2 text-black">
                       {coll.name}
                     </h2>
-                    <h3 className="text-xl md:text-3xl font-medium mb-8 text-black">
-                      {/* {coll.description} */}
-                    </h3>
+                    
                     <Button
                       variant="outline"
                       className="bg-zinc-700 text-white border-none rounded-none px-8 hover:bg-zinc-600"
