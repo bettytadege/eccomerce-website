@@ -148,8 +148,8 @@ function ProductOption({ product }: ProductOptionProps) {
       return;
     }
     try {
-      const res = await instance.post("cart", {
-        userId: userData.id,
+       await instance.post("cart", {
+        userId: userData?.id,
         variantId: selectedVariantId,
         quantity: count,
       });
@@ -205,6 +205,7 @@ function ProductOption({ product }: ProductOptionProps) {
     variantImage: selectedVariantImage,
     variantPrice: selectedVariantPrice,
   };
+  console.log(order)
 
   return (
     <div className="md:w-[40%]  w-full ">
