@@ -72,7 +72,7 @@ export function OrderModal({ open, onClose, order }: OrderModalProps) {
   const payload={
     variantId: order.selectedVariantId,
     productId: order.product.id,
-    userId: userData.id,
+    userId: userData?.id,
     quantity: order.count,
     subTotal: total,
    
