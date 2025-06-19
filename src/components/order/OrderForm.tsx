@@ -30,9 +30,8 @@ function OrderForm({ open, onClose }: OrderFormProps) {
     state: "",
     postalcode: "",
   });
-  const { userData } = useAuth();
-  // console.log("user", userData.id);
-  const id=userData?.id
+ 
+ 
   const{userId}=useParams()
   const payload = {
     userId: userId,
