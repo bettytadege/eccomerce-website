@@ -3,10 +3,10 @@ import { instance } from "@/api/axiosInstance";
 import { decodeJWT } from "@/utils/jwtUtils";
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { Products,User } from "../types/type";
+import { User } from "../types/type";
 
 type AuthData ={
-  userData: User;
+  userData: User | null;
   setUserData: (data: any) => void;
   isLoggedIn: boolean;
   signIn: (token: string) => Promise<void>;
@@ -21,7 +21,7 @@ type AuthData ={
 const AuthContext = createContext<AuthData | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [userData, setUserData] = useState<User |null>();
+  const [userData, setUserData] = useState<User |null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
  
   const [productId, setProductId] = useState<string>('');
