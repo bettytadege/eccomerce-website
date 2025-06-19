@@ -15,7 +15,7 @@ import Cart from "./components/cart/Cart";
 import { Toaster } from "sonner";
 import Checkout from "./components/order/Checkout";
 import Footer from "./components/footer/Footer";
-import { PaginationSection } from "./components/pagnation/PaginationSection";
+
 
 const hiddenHeaderRoutes = [
   "/signin",
