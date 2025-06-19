@@ -15,9 +15,10 @@ export type Products={
 
 }
 export type Attribute= {
+  
     name: string;
     value: string;
-    // image?: string;
+    image?: string;
   }
   
   export type ProductVariant= {
@@ -27,7 +28,7 @@ export type Attribute= {
     productId: string;
     price: number;
     attribute: Attribute[];
-    product:Products[]
+    product:Products
   }
 
 export type User={
