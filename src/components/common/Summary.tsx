@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
   icon?:React.ReactNode,
   name:string,
   onClick:()=>void,
-  item:number,
+  item?:number,
   subTotal:number,
  }
 function Summary({name,onClick,icon,item,subTotal}:SummaryProps) {
