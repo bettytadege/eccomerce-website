@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { Order } from "../types/type";
 
-function OrderItemDetail({ order }) {
+function OrderItemDetail({order}:{ order:Order[] }) {
   const [startIndex, setStartIndex] = useState(0);
   const items = 6;
 
