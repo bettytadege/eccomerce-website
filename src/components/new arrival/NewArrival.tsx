@@ -1,22 +1,13 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import img1 from '../../assets/images/bag2.jpg'
+
 import { useEffect, useState } from 'react'
 import { instance } from '@/api/axiosInstance'
+import { Products } from '../types/type'
 
 function NewArrival() {
-  const staticNewArrivals = [
-    { name: 'Women Jacket 1', price: 45, image: [img1] },
-    { name: 'Women Jacket 2', price: 55, image: [img1] },
-    { name: 'Women Jacket 3', price: 60, image: [img1] },
-    { name: 'Women Jacket 4', price: 70, image: [img1] },
-    { name: 'Women Jacket 5', price: 80, image: [img1] },
-    { name: 'Women Jacket 6', price: 90, image: [img1] },
-    { name: 'Women Jacket 6', price: 90, image: [img1] },
-    { name: 'Women Jacket 6', price: 90, image: [img1] },
-    { name: 'Women Jacket 6', price: 90, image: [img1] },
-  ]
 
-  const [newarrivals, setNewarrivals] = useState([])
+
+  const [newarrivals, setNewarrivals] = useState<Products[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const item = 4
 
@@ -36,7 +27,7 @@ function NewArrival() {
     try {
       const res = await instance.get('product/new-arrival?limit=20')
       console.log(' new arrivals:', res.data)
-      setNewarrivals(res.data)
+      setNewarrivals(res.data.newArrival)
     } catch (error) {
       console.error('Error :', error)
     }
@@ -54,15 +45,15 @@ function NewArrival() {
       <div className="flex items-center gap-1">
         {
           currentIndex > 0 &&
-        
-        <button
-          // disabled={currentIndex === 0}
-          className="bg-black/50 backdrop-blur-lgaspect-square size-8 flex items-center justify-center disabled:opacity-50"
-          onClick={handlePrev}
-        >
-          <ChevronLeft color='white' />
-        </button>
-}
+
+          <button
+
+            className="bg-black/50 backdrop-blur-lgaspect-square size-8 flex items-center justify-center disabled:opacity-50"
+            onClick={handlePrev}
+          >
+            <ChevronLeft color='white' />
+          </button>
+        }
 
         <div className="flex px-2  gap-4 flex-1">
           {visibleItems.map((product, index) => (
@@ -82,15 +73,15 @@ function NewArrival() {
           ))}
         </div>
 
-{currentIndex + item < newarrivals.length &&
-        <button
-          // disabled={currentIndex + item >= newarrivals.length}
-          onClick={handleNext}
-          className="bg-black/50 backdrop-blur-lg aspect-square size-8 flex items-center justify-center disabled:opacity-50"
-        >
-          <ChevronRight color="white" />
-        </button>
-}
+        {currentIndex + item < newarrivals.length &&
+          <button
+
+            onClick={handleNext}
+            className="bg-black/50 backdrop-blur-lg aspect-square size-8 flex items-center justify-center disabled:opacity-50"
+          >
+            <ChevronRight color="white" />
+          </button>
+        }
       </div>
     </div>
   )
