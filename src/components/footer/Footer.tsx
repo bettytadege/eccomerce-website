@@ -1,6 +1,6 @@
 import { CiInstagram } from "react-icons/ci";
 import { PiTelegramLogoThin, PiTiktokLogoLight } from "react-icons/pi";
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
 const community = [
   {
@@ -20,7 +20,7 @@ const community = [
   },
 ];
 
-const FooterSection = ({ title, children }) => (
+const FooterSection = ({ title, children }:{title:string ,children:ReactNode}) => (
   <ul className="space-y-2">
     <h3 className="text-lg font-semibold">{title}</h3>
     {children}
@@ -67,7 +67,7 @@ function Footer() {
                     href={item.url}
                     target="_blank"
                     rel=""
-                    // aria-label={`Follow us on ${item.name}`}
+                
                     className="hover:opacity-80 transition-opacity"
                   >
                     {item.icon}
