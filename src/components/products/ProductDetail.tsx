@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState } from "react";
 import ProductOption from "./ProductOption";
@@ -10,9 +11,7 @@ import RelatedProduct from "./RelatedProduct";
 
 
 function ProductDetail() {
-  const[product,setProduct]=useState<Products[]>([])
-  
-  
+  const[product,setProduct]=useState<Products | null>(null)
   const { id } = useParams();
   
   const fetchProducts=async(id:string)=>{
@@ -34,16 +33,20 @@ function ProductDetail() {
       console.log(error)
     }
   }
-  useEffect(()=>{fetchProducts(id)},[id])
+  useEffect(()=>{fetchProducts(id as string)},[id])
   return (
     <>
-    <div className="w-full min-h-screen space-y-20">
-  <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16 sm:gap-32 mx-4 sm:mx-8 lg:mx-20 mt-10 items-center md:items-start">
-    <ProductPreview product={product} />
-    <ProductOption product={product} />
-  </div>
-  <RelatedProduct categoryId={product.categoryId} productId={product.id} />
-</div>
+    {product ? (
+      <div className="w-full min-h-screen space-y-20">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16 sm:gap-32 mx-4 sm:mx-8 lg:mx-20 mt-10 items-center md:items-start">
+          <ProductPreview product={product} />
+          <ProductOption product={product} />
+        </div>
+        <RelatedProduct categoryId={product.categoryId} productId={product.id} />
+      </div>
+    ) : (
+      <p className="text-center mt-10">Loading product...</p>
+    )}
 
     </>
   );
