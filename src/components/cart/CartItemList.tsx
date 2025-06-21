@@ -24,7 +24,7 @@ try {
   console.log('error',error)
 }
   }
-  useEffect(()=>{fetchData(userId)},[userId])
+  useEffect(()=>{ if(userId){  fetchData(userId)}},[userId])
 
   return (
     <>
