@@ -1,6 +1,6 @@
 import { Key, useEffect, useState } from 'react'
 import ProductItem from './ProductItem'
-import { Product } from '../types/type';
+import { Products } from '../types/type';
 import { instance } from '@/api/axiosInstance';
 
 type RelatedProductProps={
@@ -8,7 +8,7 @@ type RelatedProductProps={
     productId:string
 }
 function RelatedProduct({categoryId,productId}:RelatedProductProps) {
-const [products, setProducts] = useState<Product[]>([]);
+const [products, setProducts] = useState<Products[]>([]);
 
 const fetchProducts = async (subcategoryId: string, productId: string) => {
   if (!subcategoryId || !productId) return;
@@ -39,7 +39,7 @@ useEffect(() => {
    <div className="font-semibold text-xl mx-40">Related Products</div>
   <div className="  flex  justify-center w-full">
         <div className="grid grid-cols-2 gap-4 sm:g6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-8 md:gap-5 place-items-center">
-          {products.map((product: Product, key: Key | null) => (
+          {products.map((product: Products, key: Key | null) => (
             <ProductItem
               key={key}
               img={product.image[0]}
