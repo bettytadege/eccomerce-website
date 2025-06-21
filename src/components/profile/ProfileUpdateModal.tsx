@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import {  useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { instance } from "@/api/axiosInstance";
-import { toast } from "sonner"; // Optional: Replace with your toast lib
+import { toast } from "sonner"; 
 
 type ProfileUpdateModalProps = {
   open: boolean;
@@ -43,7 +43,7 @@ function ProfileUpdateModal({ open, onClose }: ProfileUpdateModalProps) {
             type="button"
             variant="secondary"
             className="bg-[#1689FE] text-white"
-            onClick={() => handleUpdate(userData.id)}
+            onClick={() => handleUpdate(userData!.id)}
           >
             Save
           </Button>
