@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 type ProductItemProps = {
-  id?: string;
+  id: string;
   img: string;
   name: string;
   price: number;
