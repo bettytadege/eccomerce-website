@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getAuth } from "firebase/auth";
 
-
-function ProfileMenu({ setOpen }) {
+type ProfileMenuProp={
+  setOpen:(open:boolean)=>void
+}
+function ProfileMenu({ setOpen }:ProfileMenuProp) {
   const { userData } = useAuth();
   const navigate = useNavigate();
  
@@ -24,7 +26,7 @@ function ProfileMenu({ setOpen }) {
           <Card className="w-[300px] py-4 ">
             <div className="flex gap-5 text-xs items-center mx-5 text">
               <CgProfile size={27} opacity={0.5} />
-              <span className="text-gray-500">{userData.email}</span>
+              <span className="text-gray-500">{userData?.email}</span>
             </div>
             <hr className=" mx-5 mt-2" />
             <ul className="space-y-2 text-sm w-full px-3">
