@@ -140,7 +140,7 @@ function ProductOption({ product }: ProductOptionProps) {
   };
 
   const handleAddToCart = async () => {
-    if(isLoggedIn === false){
+    if(!isLoggedIn){
       return <SignIn/>
     }
     if (!selectedVariantId) {
