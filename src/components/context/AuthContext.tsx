@@ -7,7 +7,7 @@ import { User } from "../types/type";
 
 type AuthData ={
   userData: User | null;
-  setUserData: (data: any) => void;
+  setUserData: (data: User) => void;
   isLoggedIn: boolean;
   signIn: (token: string) => Promise<void>;
   signUp: (token: string) => void;
@@ -62,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) {
       fetchUserData(token);
     }
-  }, [isLoggedIn, token]);
+  }, [token]);
 
   return (
     <AuthContext.Provider
