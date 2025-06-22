@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import ProductOptionSkeleton from "./ProductOptionSkeleton";
 import { useNavigate } from "react-router-dom";
 import { Products, ProductVariant, Attribute } from "@/components/types/type";
-import SignIn from "../signin/SignIn";
+
 
 interface ProductOptionProps {
   product: Products;
@@ -140,9 +140,11 @@ function ProductOption({ product }: ProductOptionProps) {
   };
 
   const handleAddToCart = async () => {
-    if(!isLoggedIn){
-      return <SignIn/>
-    }
+    if (!isLoggedIn) {
+    toast.info("Please sign in first.");
+    navigate("/signin");
+    return;
+  }
     if (!selectedVariantId) {
       toast.error("Please select a valid variant combination");
       return;
