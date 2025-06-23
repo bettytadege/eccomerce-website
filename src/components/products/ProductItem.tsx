@@ -54,7 +54,7 @@ const cardVariants = {
         <img
           src={img}
           alt=""
-          className="w-full h-full rounded-2xl object-cover"
+          className="w-full h-full rounded-2xl object-cover hover:scale-105 duration-500 ease-in-out transition-transform"
         />
       </div>
       <div className="text  pt-1 flex flex-col gap-1 ">
