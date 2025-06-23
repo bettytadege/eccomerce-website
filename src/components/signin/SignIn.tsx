@@ -92,7 +92,7 @@ function SignIn() {
 
   return (
     <div className="flex justify-center items-center bg-[#F5F5F5] w-full min-h-screen">
-      <div className="bg-white border w-[566px] h-[600px] rounded-lg">
+      <div className="bg-white border sm:w-[566px] sm:h-[620px] rounded-lg w-[350px] h-[600px]">
         <div className="text-center pt-5 text-2xl font-semibold">
           <h1>Sign In</h1>
         </div>

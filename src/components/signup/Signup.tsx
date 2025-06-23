@@ -77,7 +77,7 @@ function Signup() {
 
   return (
     <div className="flex justify-center items-center bg-[#F5F5F5] w-full min-h-screen">
-      <div className="bg-white w-[566px] h-[600px] rounded-lg">
+      <div className="bg-white sm:w-[566px] sm:h-[620px]  w-[350px] h-[600px] rounded-lg">
         <div className="text-center text-2xl pt-5 font-semibold">
           <h1>Sign Up</h1>
         </div>
