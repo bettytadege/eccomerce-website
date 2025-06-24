@@ -8,6 +8,9 @@ import { instance } from "@/api/axiosInstance";
 import { useParams } from "react-router-dom";
 import { Products } from "../types/type";
 import RelatedProduct from "./RelatedProduct";
+import ProductOptionSkeleton from "./ProductOptionSkeleton";
+import ProductDetailSkeleton from "./ProductDetailSkeleton";
+
 
 
 function ProductDetail() {
@@ -35,8 +38,13 @@ function ProductDetail() {
   }
   useEffect(()=>{fetchProducts(id as string)},[id])
   return (
-    <>
-    {product ? (
+     <>
+    {!product ? (
+      <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16 sm:gap-32 mx-4 sm:mx-8 lg:mx-20 mt-10 items-center md:items-start">
+        <ProductDetailSkeleton/>
+        <ProductOptionSkeleton />
+      </div>
+    ) : (
       <div className="w-full min-h-screen space-y-20">
         <div className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-16 sm:gap-32 mx-4 sm:mx-8 lg:mx-20 mt-10 items-center md:items-start">
           <ProductPreview product={product} />
@@ -44,12 +52,9 @@ function ProductDetail() {
         </div>
         <RelatedProduct categoryId={product.categoryId} productId={product.id} />
       </div>
-    ) : (
-      <p className="text-center mt-10">Loading product...</p>
     )}
-
-    </>
-  );
+  </>
+);
 }
 
 export default ProductDetail;
