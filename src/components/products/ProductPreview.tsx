@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 
-import ProductDetailSkeleton from "./ProductDetailSkeleton";
+
 import { Products } from "../types/type";
 
 function ProductPreview({ product }: { product: Products }) {
@@ -15,10 +15,7 @@ function ProductPreview({ product }: { product: Products }) {
     // Add logic to change main image if needed
   };
 
-  // Show skeleton while loading or if images are missing
-  if (!product || !product.image) {
-    return <ProductDetailSkeleton />;
-  }
+  
 
   return (
     <div className="w-full sm:w-[70% h-auto sm:h-[300px] bg-white">
