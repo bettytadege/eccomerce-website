@@ -55,18 +55,7 @@ export function OrderModal({ open, onClose, order }: OrderModalProps) {
   });
 
   const { userData } = useAuth();
-  // const { cartData } = useCart();
 
-//   useEffect(()=>{
-//     const fetchAddress=asyc()=>{
-//       try {
-        
-//       } catch (error) {
-//         console.log(error)
-//       }
-
-//     }
-// }; fetchAddress(),[])
 
   const total = order?.variantPrice * order?.count;
   const payload={
