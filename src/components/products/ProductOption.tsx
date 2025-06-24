@@ -4,9 +4,10 @@ import { Button } from "../ui/button";
 import { instance } from "@/api/axiosInstance";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
-import ProductOptionSkeleton from "./ProductOptionSkeleton";
+
 import { useNavigate } from "react-router-dom";
 import { Products, ProductVariant, Attribute } from "@/components/types/type";
+import { OrderModal } from "../order/OrderModal";
 
 
 interface ProductOptionProps {
@@ -16,6 +17,7 @@ interface ProductOptionProps {
 function ProductOption({ product }: ProductOptionProps) {
   const{isLoggedIn}=useAuth()
   const [count, setCount] = useState<number>(1);
+  const [open, setOpen] = useState<boolean>(false);
   const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
   const [availableOptions, setAvailableOptions] = useState<Record<string, string[]>>({});
@@ -166,9 +168,7 @@ function ProductOption({ product }: ProductOptionProps) {
     }
   };
 
-  if (!product || !product.image) {
-    return <ProductOptionSkeleton />;
-  }
+ 
 
   const attributeOptions = product.ProductVariant
     ? product.ProductVariant.reduce(
@@ -199,17 +199,20 @@ function ProductOption({ product }: ProductOptionProps) {
   const selectedVariantPrice =
     product.ProductVariant?.find((variant) => variant.id === selectedVariantId)?.price || product.price;
 
-  const order = {
-    selectedAttributes,
-    product,
-    count,
-    selectedVariantId,
-    variantImage: selectedVariantImage,
-    variantPrice: selectedVariantPrice,
-  };
-  console.log(order)
+const order = {
+  selectedAttributes,
+  product,
+  count,
+  selectedVariantId: selectedVariantId ?? '',
+  variantImage: typeof selectedVariantImage === "string"
+    ? selectedVariantImage
+    : selectedVariantImage[0] ?? "", // fallback to first image or empty string
+  variantPrice: selectedVariantPrice,
+};
+
 
   return (
+    <>
     <div className="md:w-[40%]  w-full ">
       <div className="flex flex-col gap-7 ">
         {/* Product Name & Price */}
@@ -297,7 +300,7 @@ function ProductOption({ product }: ProductOptionProps) {
             Add to Cart
           </Button>
           <Button
-            onClick={() => navigate("/checkout")}
+            onClick={() => setOpen(true)}
             className=" px-12 lg:px-14  py-[1.4rem]  cursor-pointer shadow-none text-center rounded-sm md:px-[10%] "
             disabled={!selectedVariantId}
           >
@@ -306,6 +309,8 @@ function ProductOption({ product }: ProductOptionProps) {
         </div>
       </div>
     </div>
+  <OrderModal order={order} open={open} onClose={()=>setOpen(false)}/>
+  </>
   );
 }
 
