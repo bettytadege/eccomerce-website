@@ -1,32 +1,46 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-
 import { useEffect, useState } from 'react'
 import { instance } from '@/api/axiosInstance'
 import { Products } from '../types/type'
 
 function NewArrival() {
-
-
   const [newarrivals, setNewarrivals] = useState<Products[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const item = 4
+  const [itemsToShow, setItemsToShow] = useState(4)
+
+  const updateItemsToShow = () => {
+    const width = window.innerWidth
+
+    if (width >= 1280) {
+      setItemsToShow(4) // xl
+    } else if (width >= 1024) {
+      setItemsToShow(4) // lg
+    } else if (width >= 768) {
+      setItemsToShow(4) // md
+    } else if (width >= 615) {
+      setItemsToShow(3) // sm
+    } else if (width >= 450) {
+      setItemsToShow(2) // sm
+    } else {
+      setItemsToShow(1) // xs
+    }
+  }
 
   const handlePrev = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - item)
+      setCurrentIndex(currentIndex - itemsToShow)
     }
   }
 
   const handleNext = () => {
-    if (currentIndex + item < newarrivals.length) {
-      setCurrentIndex(currentIndex + item)
+    if (currentIndex + itemsToShow < newarrivals.length) {
+      setCurrentIndex(currentIndex + itemsToShow)
     }
   }
 
   const fetchNewArrivalProduct = async () => {
     try {
       const res = await instance.get('product/new-arrival?limit=20')
-      console.log(' new arrivals:', res.data)
       setNewarrivals(res.data.newArrival)
     } catch (error) {
       console.error('Error :', error)
@@ -35,53 +49,56 @@ function NewArrival() {
 
   useEffect(() => {
     fetchNewArrivalProduct()
+    updateItemsToShow()
+    window.addEventListener('resize', updateItemsToShow)
+    return () => window.removeEventListener('resize', updateItemsToShow)
   }, [])
 
-  const visibleItems = newarrivals.slice(currentIndex, currentIndex + item)
+  const visibleItems = newarrivals.slice(currentIndex, currentIndex + itemsToShow)
 
   return (
-    <div className="bg-gray-100 border w-[65%] h-[320px] ">
-      <p className="font-semibold p-4 text-xl">New Arrivals</p>
-      <div className="flex items-center gap-1">
-        {
-          currentIndex > 0 &&
-
+    <div className="bg-gray-100 border w-full lg:w-[65%] h-auto py-4">
+      <p className="font-semibold px-4 text-xl mb-2">New Arrivals</p>
+      <div className="flex items-center gap-1 px-2">
+        {currentIndex > 0 && (
           <button
-
-            className="bg-black/50 backdrop-blur-lgaspect-square size-8 flex items-center justify-center disabled:opacity-50"
+            className="bg-black/50 rounded-md size-8 flex items-center justify-center"
             onClick={handlePrev}
           >
-            <ChevronLeft color='white' />
+            <ChevronLeft color="white" size={20} />
           </button>
-        }
+        )}
 
-        <div className="flex px-2  gap-4 flex-1">
+        <div className="flex gap-4 overflow-hidden flex-1">
           {visibleItems.map((product, index) => (
-            <div className="w-[190px] h-[220px] bg-white hover:scale-105" key={index}>
-              <div className="w-[190px] h-[150px] p-3">
+            <div
+              key={index}
+              className="bg-white flex-shrink-0   hover:scale-105 transition-transform"
+              style={{ width: `calc(100% / ${itemsToShow} - 1rem)` }}
+            >
+              <div className="w-full h-[150px] p-2">
                 <img
                   src={Array.isArray(product.image) ? product.image[0] : product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover "
                 />
               </div>
-              <div className="px-5 font-semibold text-sm">
-                <p className='line-clamp-1'>{product.name}</p>
+              <div className="px-4 py-1 font-semibold text-sm">
+                <p className="line-clamp-1">{product.name}</p>
                 <p>{product.price} ETB</p>
               </div>
             </div>
           ))}
         </div>
 
-        {currentIndex + item < newarrivals.length &&
+        {currentIndex + itemsToShow < newarrivals.length && (
           <button
-
             onClick={handleNext}
-            className="bg-black/50 backdrop-blur-lg aspect-square size-8 flex items-center justify-center disabled:opacity-50"
+            className="bg-black/50 rounded-md size-8 flex items-center justify-center"
           >
-            <ChevronRight color="white" />
+            <ChevronRight color="white" size={20} />
           </button>
-        }
+        )}
       </div>
     </div>
   )
