@@ -47,7 +47,7 @@ function OrderForm({ open, onClose }: OrderFormProps) {
    
     try {
       const response = await instance.post('address', payload);
-      console.log("address", response);
+      // console.log("address", response);
       
       const updateUser= await instance.patch(`user/${userId}`,{ name:form.name,
         phoneNumber:form.phonenumber,addressId:response.data.id})
