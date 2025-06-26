@@ -14,7 +14,7 @@ function AllProducts() {
   const [limit] = useState(4); 
   const totalPages=Math.ceil(totalProducts / limit)
 
-  console.log("category id from all product", id);
+  // console.log("category id from all product", id);
 
   const fetchProducts = async (id: string, page: number) => {
     const offset = (page - 1) * limit;
@@ -22,7 +22,7 @@ function AllProducts() {
       const response = await instance.get(`/product/catagory/${id}`, {
         params: { limit, offset },
       });
-      console.log("all product", response);
+      // console.log("all product", response);
       setProducts(response.data.products);
       setTotalProducts(response.data.totalProducts);
     } catch (error) {
