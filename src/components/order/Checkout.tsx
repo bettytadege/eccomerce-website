@@ -27,14 +27,14 @@ function Checkout() {
 
   const fetchOrder=async(id:string)=>{
     const res=await instance.get(`order?userId=${id}`)
-    console.log('order',res)
+    // console.log('order',res)
     setOrder(res.data)
   }
   useEffect(()=>{if(userId)fetchOrder(userId)},[userId])
 
 
   const handlePayment=async()=>{
-    console.log('payment')
+    // console.log('payment')
     const pay=await instance.post('initialize')
     console.log('payment',pay)
   }
