@@ -17,7 +17,7 @@ const fetchProducts = async (subcategoryId: string, productId: string) => {
     const response = await instance.get(
       `product/${subcategoryId}/related?exclude=${productId}`
     );
-    console.log("related products", response);
+    // console.log("related products", response);
     setProducts(response.data);
   } catch (error) {
     console.log(error);
