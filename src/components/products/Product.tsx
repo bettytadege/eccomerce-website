@@ -10,7 +10,7 @@ function Product() {
   
   const [ category, setCategory ] = useState<Category[]>([]);
   const navigate=useNavigate()
-  console.log('parents',category)
+  
  
   const fetchProducts = async () => {
     try {
