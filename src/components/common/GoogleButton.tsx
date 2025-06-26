@@ -14,14 +14,14 @@ function GoogleButton() {
    const handleGoogleButton=async()=>{
     try {
       const result=await signInWithPopup(auth,provider)
-      console.log('result',result.user)
+      // console.log('result',result.user)
       const user=result.user
       const idToken=await user.getIdToken(true)
-      console.log('idtoken',idToken)
+      // console.log('idtoken',idToken)
 
     
       const response=await instance.post(`auth/google-signin`,{idToken})
-      console.log('response',response)
+      // console.log('response',response)
       setUserData(response.data.user)
       const token=  response.data.token
       signUp(token)
