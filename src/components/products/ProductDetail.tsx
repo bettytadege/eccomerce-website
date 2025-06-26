@@ -30,7 +30,7 @@ function ProductDetail() {
       return res
     } catch (error:any) {
       if(error.status === 404){
-        console.log('first')
+        
         throw Error('failed to fetch products')
       }
       console.log(error)
