@@ -77,8 +77,8 @@ function Cart() {
 
 
   return (
-    <div className="bg-[#F5F5F5] w-full min-h-screen p-10">
-      {!cartData ?
+    <div className="bg-[rgb(245,245,245)] w-full min-h-screen p-10">
+      {!cartData  ?
 
         <div className="flex flex-col items-center justify-center gap-4 bg-white p-4">
           <p className="text-xl font-semibold">Your Cart🛒 Is Empty</p>
